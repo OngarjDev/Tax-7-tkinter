@@ -1,8 +1,8 @@
 from tkinter import * 
 from tkinter import ttk,messagebox
+from datetime import datetime,time
 import csv
 
-#write and read file  input(data) return()
 def WritetoCSV(data):
     with open("datacutomer.csv","a",newline='',encoding="utf-8") as file:
         fw = csv.writer(file)
@@ -15,11 +15,26 @@ def ReadCSV():
         data = list(fr)
         return data
 
+def helpme():
+    messagebox.showinfo('ช่วยเหลือ ติดต่อGitHub:ongarj Dev',"โปรดทราบผลงานชิ้นนี้สร้างมาเพื่อการศึกษาtkinter\nสามารถศึกษาได้ที่นี่หากมีข้อสงสัยติดต่อได้ที่ Github: ongarj Dev")
+
 #main progame 
 GUI = Tk()
 label = Label()
 GUI.title('โปรแกรมคำนวณโดยใช้ GUI (Tkinter)')
 GUI.geometry('900x700')
+
+menu = Menu(GUI)
+GUI.config(menu=menu)
+filemenu = Menu(menu)
+# menu.add_cascade(label='ไฟล์', menu=filemenu)
+# filemenu.add_command(label='ใหม่')
+# filemenu.add_command(label='เปิด')
+# filemenu.add_separator()
+filemenu.add_command(label='ออก', command=GUI.quit)
+helpmenu = Menu(menu)
+menu.add_cascade(label='ช่วยเหลือ', menu=helpmenu)
+helpmenu.add_command(label='เกี่ยวกับ',command=helpme)
 
 #style tuple :FONT
 FONT1 = ('TH SarabunPSK' , 45, 'bold')
@@ -58,9 +73,11 @@ def agree(event=None):
     print(np)
     print(pp)
     print(nbp)
+    Ldate = datetime.today().strftime("%d/%m/%Y")
+    str(Ldate)
     sum1 = pp*nbp
     vat = pp*nbp *7/100
-    data = [np,pp,nbp,sum1,vat]
+    data = [np,pp,nbp,sum1,vat,Ldate]
     total = sum1+vat
     WritetoCSV(data)
     textshow1 = 'ชื่อสินค้า/product : {} \n'.format(np)
@@ -71,8 +88,6 @@ def agree(event=None):
     textshow6 = 'รวมทั้งหมด+ vat7%: {} บาท'.format(total)
     messagebox.showinfo('ผลลัพธ์',textshow1+textshow2+textshow3+textshow4+textshow5+textshow6)
 
-
-# type button input(agree())
 bt1 = ttk.Button(GUI,text="ยืนยัน",width='50',command=agree,cursor="mouse")
 bt1.pack()
 
