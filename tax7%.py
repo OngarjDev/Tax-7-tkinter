@@ -26,14 +26,9 @@ GUI.geometry('900x700')
 
 menu = Menu(GUI)
 GUI.config(menu=menu)
-filemenu = Menu(menu)
-# menu.add_cascade(label='ไฟล์', menu=filemenu)
-# filemenu.add_command(label='ใหม่')
-# filemenu.add_command(label='เปิด')
-# filemenu.add_separator()
-filemenu.add_command(label='ออก', command=GUI.quit)
 helpmenu = Menu(menu)
 menu.add_cascade(label='ช่วยเหลือ', menu=helpmenu)
+helpmenu.add_command(label='ออก', command=GUI.quit)
 helpmenu.add_command(label='เกี่ยวกับ',command=helpme)
 
 #style tuple :FONT
